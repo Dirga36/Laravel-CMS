@@ -9,7 +9,7 @@ use App\Models\Post; // added import
 class Category extends Model
 {
     use HasFactory;
-    // Relationship: Category has many posts.
+    // Relationship: Category 1-m posts.
     public function posts()
     {
         return $this->hasMany(Post::class);

@@ -16,7 +16,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relationship: Post belongs to a category.
+    // Relationship: Post m-1 category.
     public function category()
     {
         return $this->belongsTo(Category::class);

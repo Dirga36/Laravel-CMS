@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    // Relationship: User has many posts.
+    // Relationship: User 1-m posts.
     public function posts()
     {
         return $this->hasMany(Post::class);
