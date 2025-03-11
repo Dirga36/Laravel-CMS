@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('users.layout.master')
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -26,6 +26,18 @@
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
+
+            @if (Auth::user()->admin == 1)
+                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        <x-nav-link :href="route('crud-page')">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                {{ __('Admin Mode') }}
+                            </button>
+                        </x-nav-link>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
