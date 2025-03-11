@@ -4,13 +4,25 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/wow', function () {
     return view('welcome');
 });
 
-Route::get('/add', function () {
-    return view('users.add-post');
+//app IF user = regularUser
+Route::get('/', function () { // It'll be "/" in the future
+    return view('users.home');
 });
+
+//app MAIN PAGE 
+Route::get('/main-page', function () {
+    return view('users.main');
+})->middleware(['auth', 'verified'])->name('main-page');
+
+
+//app ADD A POST
+Route::get('/posts', function () {
+    return view('users.add-post');
+})->middleware(['auth', 'verified'])->name('posts');
 
 // FIRST DASHBOARD
 Route::get('/dashboard', function () {

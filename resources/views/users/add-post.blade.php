@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('users.layout.master')
 
 @section('content')
     <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
