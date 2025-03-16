@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -31,8 +32,8 @@ Route::get('/posts', function () {
 // ===================================================================================================
 
 //OnlyAdmin CRUD PAGE
-Route::get('/crud-page', function () {
-    return view('crud');
-})->middleware(['auth', 'verified'])->name('crud-page');
+Route::get('/crud-page', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('crud-page');
+Route::get('/posts/create', [PostsController::class, 'create'])->middleware(['auth', 'verified'])->name('posts.create');
+Route::post('/posts', [PostsController::class, 'store'])->middleware(['auth', 'verified'])->name('posts.store');
 
 //Route::resource('posts', PostController::class)->middleware('auth');
