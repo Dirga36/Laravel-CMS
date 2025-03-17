@@ -13,13 +13,13 @@ class PostsController extends Controller
     {
         $posts = Post::with('category', 'user')->get();
         $categories = Category::all();
-        return view('crud', compact('posts', 'categories'));
+        return view('users.main', compact('posts', 'categories'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('create-post', compact('categories'));
+        return view('users.add-post', compact('categories'));
     }
 
     public function store(Request $request)
@@ -44,6 +44,12 @@ class PostsController extends Controller
 
         $post->save();
 
-        return redirect()->route('crud-page')->with('success', 'Post created successfully.');
+        return redirect()->route('add-post')->with('success', 'Post created successfully.');
+    }
+
+    public function myPosts()
+    {
+        $posts = Post::with('category')->where('user_id', Auth::id())->get();
+        return view('users.my-post', compact('posts'));
     }
 }

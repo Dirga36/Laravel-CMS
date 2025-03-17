@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+  @apply block text-2xl mt-2 mb-2 mx-0 font-bold;
+}
+
+h2 {
+  @apply block text-xl mt-3 mb-3 mx-0 font-bold;
+}
+
+h3 {
+  @apply block text-lg mt-4 mb-4 mx-0 font-bold;
+}
+
+h4 {
+  @apply block text-base mt-5 mb-5 mx-0 font-bold;
+}
+
+h5 {
+  @apply block text-sm mt-6 mb-6 mx-0 font-bold;
+}
+
+h6 {
+  @apply block text-xs mt-7 mb-7 mx-0 font-bold;
+}
+
+p {
+  @apply block text-base mt-2 mb-2 mx-0;
+}

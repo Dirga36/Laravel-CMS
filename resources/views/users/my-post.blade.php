@@ -2,14 +2,13 @@
 
 @section('header')
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-        {{ __('UTAMA page') }}
+        {{ __('User Post Page') }}
     </h2>
 @endsection
 
 @section('content')
     <section class="antialiased py-8 md:py-16 text-black">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12 space-y-5">
-
             @foreach ($posts as $post)
                 <div
                     class="text-black bg-slate-100 dark:bg-slate-700 dark:text-white rounded-lg border border-slate-400 hover:border-none hover:drop-shadow-lg dark:hover:drop-shadow-none">

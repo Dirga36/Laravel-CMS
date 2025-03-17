@@ -15,8 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Main Page & dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('posts')" :active="request()->routeIs('posts')">
+                    <x-nav-link :href="route('add-post')" :active="request()->routeIs('add-post')">
                         {{ __('Hero Post Page') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('my-post')" :active="request()->routeIs('my-post')">
+                        {{ __('User Post Page') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -81,8 +84,11 @@
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Main Page & dashboard') }}
             </x-nav-link>
-            <x-nav-link :href="route('posts')" :active="request()->routeIs('posts')">
+            <x-nav-link :href="route('add-post')" :active="request()->routeIs('add-post')">
                 {{ __('Hero Post Page') }}
+            </x-nav-link>
+            <x-nav-link :href="route('my-post')" :active="request()->routeIs('my-post')">
+                {{ __('User Post Page') }}
             </x-nav-link>
         </div>
 

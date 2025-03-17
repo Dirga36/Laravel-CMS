@@ -19,21 +19,22 @@ Route::get('/', function () {
     return view('users.home');
 });
 
-//AllUser MAIN PAGE 
-Route::get('/dashboard', function () {
-    return view('users.main');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 //AllUser POSTs PAGE 
-Route::get('/posts', function () {
-    return view('users.add-post');
-})->middleware(['auth', 'verified'])->name('posts');
+Route::middleware(['auth', 'verified'])->group(function () {
+    //AllUser MAIN PAGE 
+    Route::get('/dashboard', [PostsController::class, 'index'])->name('dashboard');
+    Route::get('/my-post', [PostsController::class, 'myPosts'])->name('my-post');
+
+    //AllUser ADD POST PAGE
+    Route::get('/add-post', [PostsController::class, 'create'])->name('add-post');
+    Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+});
 
 // ===================================================================================================
 
 //OnlyAdmin CRUD PAGE
-Route::get('/crud-page', [PostsController::class, 'index'])->middleware(['auth', 'verified'])->name('crud-page');
-Route::get('/posts/create', [PostsController::class, 'create'])->middleware(['auth', 'verified'])->name('posts.create');
-Route::post('/posts', [PostsController::class, 'store'])->middleware(['auth', 'verified'])->name('posts.store');
+Route::get('/crud', function () {
+    return view('crud');
+})->middleware(['auth', 'verified'])->name('crud-page');
 
 //Route::resource('posts', PostController::class)->middleware('auth');
