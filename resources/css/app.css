@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 h1 {
-  @apply block text-2xl mt-2 mb-2 mx-0 font-bold;
+  @apply block text-2xl mx-0 font-bold;
 }
 
 h2 {
@@ -27,5 +27,5 @@ h6 {
 }
 
 p {
-  @apply block text-base mt-2 mb-2 mx-0;
+  @apply block text-base mx-0;
 }

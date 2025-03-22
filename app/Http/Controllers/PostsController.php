@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
+    public function myPosts()
+    {
+        $posts = Post::with('category')->where('user_id', Auth::id())->get();
+        return view('users.my-post', compact('posts'));
+    }
+    
     public function index()
     {
         $posts = Post::with('category', 'user')->get();
@@ -19,7 +25,7 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('users.add-post', compact('categories'));
+        return view('users.create-post', compact('categories'));
     }
 
     public function store(Request $request)
@@ -44,12 +50,51 @@ class PostsController extends Controller
 
         $post->save();
 
-        return redirect()->route('add-post')->with('success', 'Post created successfully.');
+        return redirect()->route('create-post')->with('success', 'Post created successfully.');
     }
 
-    public function myPosts()
+    public function show($id)
     {
-        $posts = Post::with('category')->where('user_id', Auth::id())->get();
-        return view('users.my-post', compact('posts'));
+        $post = Post::with('category', 'user')->findOrFail($id);
+        return view('posts.post', compact('post'));
+    }
+
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        return view('users.edit-post', compact('post', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->category_id = $request->category_id;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $post->image = $imagePath;
+        }
+
+        $post->save();
+
+        return redirect()->route('dashboard')->with('success', 'Post updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Post deleted successfully.');
     }
 }
